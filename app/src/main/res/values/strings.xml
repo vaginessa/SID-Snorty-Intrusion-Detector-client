@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SID - Snorty Intrusion Detector</string>
+    <string name="title_activity_ids">Server Connected</string>
+    <string name="welcome">Snorty Intrusion Detector is an application that analyzes network traffic on your smartphone by communicating with server, where standard vector machine, implemented into Snort, processes every packet and sends alerts back to your device.</string>
+</resources>

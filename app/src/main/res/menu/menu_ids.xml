@@ -1,0 +1,6 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context="com.example.kuba.ids.IdsActivity">
+    <item android:id="@+id/action_settings" android:title="WAAAT?"
+        android:orderInCategory="100" app:showAsAction="never" />
+</menu>
