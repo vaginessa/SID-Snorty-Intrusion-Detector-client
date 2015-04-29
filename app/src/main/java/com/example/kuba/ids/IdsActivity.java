@@ -57,8 +57,10 @@ public class IdsActivity extends ActionBarActivity {
         mHostTextV.setText("Host: " + mHost);
         mPortTextV.setText("Port: " + mPortString);
 
+        /*
         if (mServer == null || mServer.isAlive() == false)
-            mServer = new ClientServer(mPortString, mPortNumber);
+            mServer = new ClientServer(mPortString, mPortNumber);'
+            */
     }
 
 

@@ -111,6 +111,19 @@ public class ClientServer {
         }
     }
 
+    /*
+    public void sendRequest(String[] requestLines) throws IOException{
+        try {
+            for(String requestLine : requestLines){
+                writeLine(requestLine);
+            }
+            writeLine("");
+        } catch (IOException e){
+            throw new IOException(e.toString());
+        }
+    }
+    */
+
     public List<String> executeSimpleCommand(String command) throws IOException, Exception {
         List<String> results = new ArrayList<String>();
         if (command != null)
