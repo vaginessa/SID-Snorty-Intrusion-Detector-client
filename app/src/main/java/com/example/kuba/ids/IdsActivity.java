@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,22 @@ public class IdsActivity extends ActionBarActivity {
     private String mPortString;
     private int mPortNumber;
 
+    private MainRunnable mRun;
+
+    private TextView mAllTimeHighText;
+    private TextView mAllTimeMediumText;
+    private TextView mAllTimeLowText;
+    private TextView mAllTimeTotalText;
+    private TextView mLast72HighText;
+    private TextView mLast72MediumText;
+    private TextView mLast72LowText;
+    private TextView mLast72TotalText;
+    private TextView mLast24HighText;
+    private TextView mLast24MediumText;
+    private TextView mLast24LowText;
+    private TextView mLast24TotalText;
+    private LinearLayout alertLinearLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +65,7 @@ public class IdsActivity extends ActionBarActivity {
         mConnectButton = (Button) findViewById(R.id.connect);
         mDisconnectButton = (Button) findViewById(R.id.disconnect);
 
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             mPortString = extras.getString("PORT");
@@ -57,10 +75,21 @@ public class IdsActivity extends ActionBarActivity {
         mHostTextV.setText("Host: " + mHost);
         mPortTextV.setText("Port: " + mPortString);
 
-        /*
-        if (mServer == null || mServer.isAlive() == false)
-            mServer = new ClientServer(mPortString, mPortNumber);'
-            */
+        mAllTimeHighText = (TextView) findViewById(R.id.all_time_high);
+        mAllTimeMediumText = (TextView) findViewById(R.id.all_time_med);
+        mAllTimeLowText = (TextView) findViewById(R.id.all_time_low);
+        mAllTimeTotalText = (TextView) findViewById(R.id.all_time_total);
+        mLast72HighText = (TextView) findViewById(R.id.last_72_high);
+        mLast72MediumText = (TextView) findViewById(R.id.last_72_med);
+        mLast72LowText = (TextView) findViewById(R.id.last_72_low);
+        mLast72TotalText = (TextView) findViewById(R.id.last_72_total);
+        mLast24HighText = (TextView) findViewById(R.id.last_24_high);
+        mLast24MediumText = (TextView) findViewById(R.id.last_24_med);
+        mLast24LowText = (TextView) findViewById(R.id.last_24_low);
+        mLast24TotalText = (TextView) findViewById(R.id.last_24_total);
+        alertLinearLayout = (LinearLayout) findViewById(R.id.server_view_alert_linear_layout);
+
+        mRun = new MainRunnable();
     }
 
 
@@ -127,7 +156,7 @@ public class IdsActivity extends ActionBarActivity {
             toast.makeText(context, "Server Connection is already terminated", duration).show();
         else
         {
-            mServer.writeLine("Spierdalam stond!");
+            mServer.writeLine("CLOSING"); //TODO
             mServer.close();
         }
     }

@@ -1,10 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.kuba.ids.IdsActivity">
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -24,29 +25,279 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/connect"
-                android:text="Connect"
-                android:onClick="connectButtonOnClick"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="3dip"
+                android:layout_marginTop="3dip"
+                android:layout_marginBottom="10dp">
+                <Button
+                    android:id="@+id/connect"
+                    android:text="Connect"
+                    android:onClick="connectButtonOnClick"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"/>
+                <Button
+                    android:id="@+id/disconnect"
+                    android:text="Disconnect"
+                    android:onClick="disconnectButtonOnClick"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"/>
+                <Button
+                    android:text="Exit"
+                    android:onClick="finishButtonOnClick"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"/>
 
-            <Button
-                android:id="@+id/disconnect"
-                android:text="Disconnect"
-                android:onClick="disconnectButtonOnClick"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
 
-            <Button
-                android:text="Exit App"
-                android:onClick="finishButtonOnClick"
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"/>
+                android:orientation="horizontal"
+                android:layout_below="@id/server_view_title"
+                android:id="@+id/">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="vertical"
+                    android:layout_marginRight="3dip"
+                    android:layout_marginTop="26dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:text="High"
+                        android:gravity="center" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:text="Medium"
+                        android:gravity="center" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:text="Low"
+                        android:gravity="center" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:text="Total"
+                        android:gravity="center" />
+                </LinearLayout>
+                <View
+                    android:layout_width="1dip"
+                    android:layout_height="fill_parent"
+                    android:background="#909090"
+                    android:layout_marginTop="25dp" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    >
+                    <LinearLayout
+                        android:id="@+id/last_24"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:text="24hrs"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dip"
+                            android:width="50dip" />
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dip"
+                            android:background="#909090" />
+                        <TextView
+                            android:id="@+id/last_24_high"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dip"
+                            android:text="-"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dip"
+                            android:textColor="#FF0000" />
+                        <TextView
+                            android:id="@+id/last_24_med"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:text="-"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dip"
+                            android:textColor="#FFFF00" />
+                        <TextView
+                            android:id="@+id/last_24_low"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:text="-"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dip"
+                            android:textColor="#00FF00" />
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dip"
+                            android:background="#909090" />
+                        <TextView
+                            android:id="@+id/last_24_total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:text="-"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dip"
+                            android:textColor="#FFFFFF" />
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dip"
+                            android:background="#909090" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/last_72"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:text="72hrs"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dip"
+                            android:width="50dip" />
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dip"
+                            android:background="#909090" />
+                        <TextView
+                            android:id="@+id/last_72_high"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dip"
+                            android:text="-"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dip"
+                            android:textColor="#FF0000" />
+                        <TextView
+                            android:id="@+id/last_72_med"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:text="-"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dip"
+                            android:textColor="#FFFF00" />
+                        <TextView
+                            android:id="@+id/last_72_low"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:text="-"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dip"
+                            android:textColor="#00FF00" />
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dip"
+                            android:background="#909090" />
+                        <TextView
+                            android:id="@+id/last_72_total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:text="-"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dip"
+                            android:textColor="#FFFFFF" />
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dip"
+                            android:background="#909090" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/alltime"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:layout_weight="1"                       >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:text="Alltime"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dip"
+                            android:width="50dip" />
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dip"
+                            android:layout_marginRight="5dp"
+                            android:background="#909090" />
+                        <TextView
+                            android:id="@+id/all_time_high"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dip"
+                            android:text="-"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dip"
+                            android:textColor="#FF0000" />
+                        <TextView
+                            android:id="@+id/all_time_med"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:text="-"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dip"
+                            android:textColor="#FFFF00" />
+                        <TextView
+                            android:id="@+id/all_time_low"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:text="-"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dip"
+                            android:textColor="#00FF00" />
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dip"
+                            android:layout_marginRight="5dp"
+                            android:background="#909090" />
+                        <TextView
+                            android:id="@+id/all_time_total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:text="-"
+                            android:gravity="center"
+                            android:layout_marginLeft="2dip"
+                            android:textColor="#FFFFFF" />
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dip"
+                            android:layout_marginRight="5dp"
+                            android:background="#909090" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/server_view_alert_linear_layout"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="5dip"
+                android:layout_marginBottom="10px"
+                android:layout_marginLeft="10px"
+                android:layout_marginRight="10px"
+                android:layout_below="@id/severity_labels" />
 
         </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
 </LinearLayout>
