@@ -60,9 +60,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@id/server_view_title"
-                android:id="@+id/">
+                android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -295,7 +293,7 @@
                 android:layout_marginBottom="10px"
                 android:layout_marginLeft="10px"
                 android:layout_marginRight="10px"
-                android:layout_below="@id/severity_labels" />
+                />
 
         </LinearLayout>
     </LinearLayout>

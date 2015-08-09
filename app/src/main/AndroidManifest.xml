@@ -27,6 +27,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.kuba.ids.MainActivity" />
         </activity>
+        <service
+            android:enabled="true"
+            android:name=".VpnServiceExtended"
+            android:label="VpnServiceExtended"
+            android:permission="android.permission.BIND_VPN_SERVICE">
+            <intent-filter>
+                <action android:name="android.net.VpnService"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

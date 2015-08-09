@@ -1,9 +1,11 @@
 package com.example.kuba.ids;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
+import android.net.VpnService;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,18 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 /**
  * Second activity providing server connection and communication.
- * @param mSocket
- * @param mHost
- * @param mPortNumber
  */
 public class IdsActivity extends ActionBarActivity {
     private ClientServer mServer = null;
@@ -38,7 +31,7 @@ public class IdsActivity extends ActionBarActivity {
     private String mPortString;
     private int mPortNumber;
 
-    private MainRunnable mRun;
+   // private MainRunnable mRun;
 
     private TextView mAllTimeHighText;
     private TextView mAllTimeMediumText;
@@ -89,7 +82,8 @@ public class IdsActivity extends ActionBarActivity {
         mLast24TotalText = (TextView) findViewById(R.id.last_24_total);
         alertLinearLayout = (LinearLayout) findViewById(R.id.server_view_alert_linear_layout);
 
-        mRun = new MainRunnable();
+        //mRun = new MainRunnable();
+        mServer = new ClientServer(mHost, mPortNumber);
     }
 
 
@@ -118,7 +112,6 @@ public class IdsActivity extends ActionBarActivity {
 
     /**
      * Runnable class with communication trial to specific IP/Port
-     * @param mReadString read line from {@link mSocket}
      */
 
     public void connectButtonOnClick(View view) {
@@ -127,11 +120,24 @@ public class IdsActivity extends ActionBarActivity {
         int duration = Toast.LENGTH_SHORT;
         Toast toast = new Toast(context);
 
+        Log.d("IdsActivity", "starting VpnService");
+        Intent intent = VpnService.prepare(getApplicationContext());
+        if (intent != null) {
+            startActivityForResult(intent, 0);
+        } else {
+            onActivityResult(0, RESULT_OK, null);
+        }
+
+
+
+        /*
         mServer.open();
         if (mServer.isAlive()) {
             toast.makeText(context, "Server Connection established", duration).show();
             mConnectButton.setEnabled(!mServer.isAlive());
             mDisconnectButton.setEnabled(mServer.isAlive());
+
+
 
             try {
                 mServer.writeLine("trololol");
@@ -141,10 +147,12 @@ public class IdsActivity extends ActionBarActivity {
                 e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
+                
             }
         } else {
             toast.makeText(context, "Server Connection failed", duration).show();
         }
+        */
     }
 
     public void disconnectButtonOnClick(View view) throws IOException {
@@ -153,7 +161,7 @@ public class IdsActivity extends ActionBarActivity {
         Toast toast = new Toast(context);
 
         if (!mServer.isAlive())
-            toast.makeText(context, "Server Connection is already terminated", duration).show();
+            Toast.makeText(context, "Server Connection is already terminated", duration).show();
         else
         {
             mServer.writeLine("CLOSING"); //TODO
@@ -165,5 +173,12 @@ public class IdsActivity extends ActionBarActivity {
         if (!mServer.isAlive())
             mServer.close();
         finish();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            Intent intent = new Intent(this, VpnServiceExtended.class);
+            startService(intent);
+        }
     }
 }

@@ -1,13 +1,19 @@
 package com.example.kuba.ids;
 
-import android.app.DownloadManager;
-import android.content.Intent;
-
-import java.io.IOException;
+import android.util.Log;
 
 /**
  * Created by Kuba on 2015-04-28.
  */
+class Trololo {
+    public void Trololo(){
+        //"trololo"
+                Log.i("asdas", "Asdas");
+    }
+};
+
+
+/*
 public class MainRunnable implements Runnable {
     private SIDService mReqService;
 
@@ -25,13 +31,12 @@ public class MainRunnable implements Runnable {
 
     }
 
-    /*
     public void startReqService() {
         Intent newIntent = new Intent(nrbr.getContext(), Request.class);
         newIntent.putExtra(Request.ROW_ID_TAG, nrbr.getRowId());
-        nrbr.startService(newIntent);
+        this.startService(newIntent);
         nrbr.bindService(newIntent, mConnection, 0);
-    } */
+    }
 
     public void close(){
         /*
@@ -40,6 +45,8 @@ public class MainRunnable implements Runnable {
             if(mBoundRequest != null)
                 nrbr.unbindService(mConnection);
         }
-        */
+
     }
 }
+
+*/
