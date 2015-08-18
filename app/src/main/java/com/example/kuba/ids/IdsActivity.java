@@ -20,6 +20,8 @@ import java.io.IOException;
  * Second activity providing server connection and communication.
  */
 public class IdsActivity extends ActionBarActivity {
+
+    private Intent mIntent = null;
     private ClientServer mServer = null;
     private TextView mHostTextV;
     private TextView mPortTextV;
@@ -27,9 +29,10 @@ public class IdsActivity extends ActionBarActivity {
     private Button mConnectButton;
     private Button mDisconnectButton;
 
-    private String mHost;
-    private String mPortString;
+    private String mHost = null;
+    private String mPortString = null;
     private int mPortNumber;
+    private boolean mHostObtained = false;
 
    // private MainRunnable mRun;
 
@@ -58,15 +61,24 @@ public class IdsActivity extends ActionBarActivity {
         mConnectButton = (Button) findViewById(R.id.connect);
         mDisconnectButton = (Button) findViewById(R.id.disconnect);
 
+        mIntent = getIntent();
+        Bundle extras = mIntent.getExtras();
 
-        Bundle extras = getIntent().getExtras();
         if (extras != null) {
             mPortString = extras.getString("PORT");
             mHost = extras.getString("HOST");
             mPortNumber = Integer.parseInt(mPortString);
+            mHostTextV.setText("Host: " + mHost);
+            mPortTextV.setText("Port: " + mPortString);
+            mHostObtained = true;
         }
-        mHostTextV.setText("Host: " + mHost);
-        mPortTextV.setText("Port: " + mPortString);
+        else
+        {
+            mPortString = extras.getString("PORT");
+            mHost = extras.getString("HOST");
+            mHostTextV.setText("Error obtaining Host");
+            mPortTextV.setText("Error obtaining Port");
+        }
 
         mAllTimeHighText = (TextView) findViewById(R.id.all_time_high);
         mAllTimeMediumText = (TextView) findViewById(R.id.all_time_med);
@@ -82,8 +94,7 @@ public class IdsActivity extends ActionBarActivity {
         mLast24TotalText = (TextView) findViewById(R.id.last_24_total);
         alertLinearLayout = (LinearLayout) findViewById(R.id.server_view_alert_linear_layout);
 
-        //mRun = new MainRunnable();
-        mServer = new ClientServer(mHost, mPortNumber);
+        //mServer = new ClientServer(mHost, mPortNumber);
     }
 
 
@@ -120,6 +131,11 @@ public class IdsActivity extends ActionBarActivity {
         int duration = Toast.LENGTH_SHORT;
         Toast toast = new Toast(context);
 
+        if (mHostObtained = false) {
+            toast.makeText(context, "Lack of server parameters: Host|Port.", duration).show();
+            return;
+        }
+
         Log.d("IdsActivity", "starting VpnService");
         Intent intent = VpnService.prepare(getApplicationContext());
         if (intent != null) {
@@ -128,8 +144,11 @@ public class IdsActivity extends ActionBarActivity {
             onActivityResult(0, RESULT_OK, null);
         }
 
-
-
+/*
+        ConnectionTrial connection;
+        Thread thread = new Thread(connection = new ConnectionTrial(this.getApplicationContext()));
+        thread.start();
+*/
         /*
         mServer.open();
         if (mServer.isAlive()) {
@@ -161,7 +180,7 @@ public class IdsActivity extends ActionBarActivity {
         Toast toast = new Toast(context);
 
         if (!mServer.isAlive())
-            Toast.makeText(context, "Server Connection is already terminated", duration).show();
+            toast.makeText(context, "Server Connection is already terminated", duration).show();
         else
         {
             mServer.writeLine("CLOSING"); //TODO
@@ -170,15 +189,21 @@ public class IdsActivity extends ActionBarActivity {
     }
 
     public void finishButtonOnClick(View view) {
+        //TODO destroy service
         if (!mServer.isAlive())
             mServer.close();
         finish();
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            Intent intent = new Intent(this, VpnServiceExtended.class);
+
+    @Override
+    protected void onActivityResult(int request, int result, Intent data) {
+        if (result == RESULT_OK) {
+            Intent intent = new Intent(this, VpnServiceExtended.class)
+                    .putExtra("PORT", mPortString)
+                    .putExtra("HOST", mHost);
             startService(intent);
         }
     }
+
 }

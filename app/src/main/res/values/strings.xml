@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">SID - Snorty Intrusion Detector</string>
     <string name="title_activity_ids">Server Connected</string>
-    <string name="welcome">Snorty Intrusion Detector is an application that analyzes network traffic on your smartphone by communicating with server, where standard vector machine, implemented into Snort, processes every packet and sends alerts back to your device.</string>
+    <string name="welcome">Snorty Intrusion Detector is an application that analyzes network traffic on your smartphone by communicating with server, where standard vector machine, implemented into Snort, processes every packet and sends alerts back to your device. Port 12121 is default port for server connection. </string>
     <string name="disconnected">VpnService disconnected</string>
+    <string name="connected">VPN is connected</string>
+    <string name="connecting">VPN is connecting...</string>
 </resources>

@@ -1,24 +1,20 @@
 package com.example.kuba.ids;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.io.IOException;
+import java.net.InetAddress;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * First, main activity with Host IP and Port input.
@@ -41,8 +37,9 @@ public class MainActivity extends ActionBarActivity {
         mHost = (EditText) findViewById(R.id.host);
         mPort = (EditText) findViewById(R.id.port);
 
-        mHost.setText("192.168.0.172");
-        mPort.setText("12121");
+        mPort.setText("12121"); // DEFAULT SERVER PORT
+
+        mHost.setText("192.168.0.172"); // Server temporary ip
 
     }
 
@@ -98,8 +95,7 @@ public class MainActivity extends ActionBarActivity {
         else {
             if(mServerPortText.length() != 0) {
                 boolean isNumber = Pattern.matches("[0-9]+", mServerPortText);
-                if(isNumber)
-                    mServerPortNumber = Integer.parseInt(mServerPortText);
+                if(isNumber)                    mServerPortNumber = Integer.parseInt(mServerPortText);
             }
             if(mServerPortNumber < 1 || mServerPortNumber > 65535)
                 errorString += (errorString == "" ? "" : "\n\n") + "Invalid port. Valid port range is 1-65535.";
